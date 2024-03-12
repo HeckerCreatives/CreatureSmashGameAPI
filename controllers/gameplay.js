@@ -19,7 +19,7 @@ exports.playfightgame = async (req, res) => {
     })
 
     if (maintenancedata.value != "0"){
-        return res.status(400).json({ message: "bad-request", data: "The fighting game is currently under maintenance! Please check our website for more details and try again later." })
+        return res.status(400).json({ message: "maintenance", data: "The fighting game is currently under maintenance! Please check our website for more details and try again later." })
     }
 
     const inventorydata = await Inventory.findOne({owner: new mongoose.Types.ObjectId(id), _id: new mongoose.Types.ObjectId(creatureid)})
@@ -31,7 +31,7 @@ exports.playfightgame = async (req, res) => {
     })
 
     if (!inventorydata){
-        return res.status(400).json({ message: "bad-request", data: "You don't owned this creature! Please buy first and try again" })
+        return res.status(400).json({ message: "notowned", data: "You don't owned this creature! Please buy first and try again" })
     }
 
     const creature = creaturedata(inventorydata.type)
@@ -40,7 +40,7 @@ exports.playfightgame = async (req, res) => {
     const limitperday = creaturelimit / creature.expiration
 
     if (inventorydata.dailyaccumulated >= limitperday){
-        return res.status(400).json({ message: "limit", data: "You already reached the limit per day! Please wait after 24 hours to play again." })
+        return res.status(400).json({ message: "dailylimit", data: "You already reached the limit per day! Please wait after 24 hours to play again." })
     }
 
     if (inventorydata.totalaccumulated >= creaturelimit){
@@ -90,7 +90,7 @@ exports.donefightgame = async (req, res) => {
     }
 
     if (inventorydata.dailyaccumulated >= limitperday){
-        return res.status(400).json({ message: "limit", data: "You already reached the limit per day! Please wait after 24 hours to play again." })
+        return res.status(400).json({ message: "dailylimit", data: "You already reached the limit per day! Please wait after 24 hours to play again." })
     }
 
     if (tempAccumulated >= creaturelimit){
@@ -138,5 +138,5 @@ exports.playeventgame = async (req, res) => {
 }
 
 exports.doneeventgame = async(req, res) => {
-    
+
 }
