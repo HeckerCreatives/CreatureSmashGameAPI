@@ -33,13 +33,13 @@ exports.dashboard = async (req, res) => {
     })
 
     inventorylist.forEach(creatures => {
-        const {_id, type, rank, qty, totalaccumalated, dailyaccumulated} = creatures
+        const {_id, type, rank, qty, totalaccumulated, dailyaccumulated} = creatures
 
         data["inventory"][type] = {
             id: _id,
             rank: rank,
             qty: qty,
-            totalaccumalted: totalaccumalated,
+            totalaccumulated: totalaccumulated,
             dailyaccumulated: dailyaccumulated,
             isowned: "Owned"
         }
