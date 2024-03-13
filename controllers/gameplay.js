@@ -1,6 +1,7 @@
 const { default: mongoose } = require("mongoose")
 const Inventory = require("../models/Inventory")
 const Maintenance = require("../models/Maintenance")
+const Score = require("../models/Score")
 const { addwallethistory } = require("../utils/wallethistorytools")
 const { addwallet } = require("../utils/walletstools")
 const { creaturedata } = require("../utils/inventorytools")
@@ -138,5 +139,16 @@ exports.playeventgame = async (req, res) => {
 }
 
 exports.doneeventgame = async(req, res) => {
+    const {id, username} = req.user
+    const {score} = req.body
 
+    await Score.findOneAndUpdate({owner: new mongoose.Types.ObjectId(id)}, {$inc: {amount: score}})
+    .catch(err => {
+        console.log(`There's a problem adding score data for ${username} error: ${err}`)
+        return res.status(400).json({ message: "bad-request", data: "There's a problem with the server! Please contact customer support and try again." })
+    })
+
+    await addanalytics(id, `Event Game`, `Player ${username} win ${score} in Event Game`, score.toFixed(2))
+
+    return res.json({message: "success"})
 }
