@@ -41,7 +41,7 @@ exports.dashboard = async (req, res) => {
             qty: qty,
             totalaccumalted: totalaccumalted,
             dailyaccumulated: dailyaccumulated,
-            isowned: "owned"
+            isowned: "Owned"
         }
     })
 
