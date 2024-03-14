@@ -1,5 +1,6 @@
 const Userdetails = require("../models/Userdetails")
 const Inventory = require("../models/Inventory")
+const Score = require("../models/Score")
 const { default: mongoose } = require("mongoose")
 
 exports.dashboard = async (req, res) => {
