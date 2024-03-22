@@ -115,7 +115,7 @@ exports.donefightgame = async (req, res) => {
 
 
     await addwallet("gamebalance", finalScore, id)
-    await addwallethistory(id, "gamebalance", finalScore)
+    await addwallethistory(id, "gamebalance", finalScore, "65fd2bfb070f3af42b4ab36d")
     await addanalytics(id, `gamebalance`, `Player ${username} win ${finalScore} in Creature Game`, score.toFixed(2))
 
     return res.json({message: "success"})
