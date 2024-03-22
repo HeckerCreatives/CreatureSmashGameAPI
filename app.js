@@ -8,7 +8,7 @@ require("dotenv").config();
 const app = express();
 
 const corsConfig = {
-    origin: [""],
+    origin: ["http://127.0.0.1:51264", "http://127.0.0.1:51264/", "https://creaturesmashwebsite.onrender.com","https://creaturesmashwebsite.onrender.com/", "https://creaturesmashlandingwebsite.onrender.com", "https://creaturesmashlandingwebsite.onrender.com/", "https://starlit-brigadeiros-1594b7.netlify.app/", "https://starlit-brigadeiros-1594b7.netlify.app"],
     methods: ["GET", "POST", "PUT", "DELETE"], // List only` available methods
     credentials: true, // Must be set to true
     allowedHeaders: ["Origin", "Content-Type", "X-Requested-With", "Accept", "Authorization"],
